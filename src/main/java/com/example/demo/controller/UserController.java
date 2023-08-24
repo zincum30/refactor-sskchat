@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.domain.dto.FindUserPasswordDto;
+import com.example.demo.domain.dto.FindUserIdDto;
 import com.example.demo.domain.dto.LoginDto;
 import com.example.demo.domain.dto.RegisterDto;
 import com.example.demo.service.UserService;
@@ -12,11 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 
 @RequiredArgsConstructor
+@RestControllerAdvice
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/user")
@@ -29,7 +32,6 @@ public class UserController {
         userService.createAccount(registerDto);
         return ResponseEntity.ok().build();
     }
-
 
     @GetMapping("/check-duplicated-id")
     public Object checkDuplicatedId(String userId) {
@@ -45,19 +47,20 @@ public class UserController {
 
 
     @GetMapping("/find-id")
-    public String findUserId() {
+    public String findUserId(FindUserIdDto findUserIdDto) {
+        return userService.findUserId(findUserIdDto);
     }
 
 
     @GetMapping("/find-password")
-    public String findUserPassword() {
+    public String findUserPassword(FindUserPasswordDto findUserPasswordDto) {
+        return userService.findUserPassword(findUserPasswordDto);
     }
 
 
-    @GetMapping("/login")
-    public Object login(@RequestBody LoginDto loginDto) {
-
-    }
+//    @GetMapping("/login")
+//    public Object login() {
+//    }
 
 
 
