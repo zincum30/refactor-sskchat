@@ -1,19 +1,22 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.domain.dto.FindUserPasswordDto;
+import com.example.demo.domain.CustomErrorCode;
 import com.example.demo.domain.dto.FindUserIdDto;
-import com.example.demo.domain.dto.LoginDto;
+import com.example.demo.domain.dto.FindUserPasswordDto;
 import com.example.demo.domain.dto.RegisterDto;
 import com.example.demo.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -34,35 +37,21 @@ public class UserController {
     }
 
     @GetMapping("/check-duplicated-id")
-    public Object checkDuplicatedId(String userId) {
-        Assert.notNull(userId, "Id must not be null");
-        if (userService.checkDuplicatedId(userId)) {
-            return ResponseEntity.ok("available");
-        }
-        else {
-            return "CONFLICT_ID";
-        }
-
+    public Object checkDuplicatedId(@RequestParam(name = "userId") String userId) {
+        userService.checkDuplicatedId(userId);
+        return ResponseEntity.ok("available");
     }
 
-
-    @GetMapping("/find-id")
-    public String findUserId(FindUserIdDto findUserIdDto) {
+    @PostMapping("/find-id")
+    public String findUserId(@RequestBody FindUserIdDto findUserIdDto){
         return userService.findUserId(findUserIdDto);
     }
 
 
-    @GetMapping("/find-password")
+    @PostMapping("/find-password")
     public String findUserPassword(FindUserPasswordDto findUserPasswordDto) {
         return userService.findUserPassword(findUserPasswordDto);
     }
 
-
-//    @GetMapping("/login")
-//    public Object login() {
-//    }
-
-
-
-
+    
 }
