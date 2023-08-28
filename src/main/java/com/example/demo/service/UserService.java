@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import com.example.demo.controller.CustomExceptionController;
+import com.example.demo.domain.CustomException;
 import com.example.demo.domain.User;
 import com.example.demo.domain.dto.FindUserPasswordDto;
 import com.example.demo.domain.dto.FindUserIdDto;
@@ -8,8 +10,14 @@ import com.example.demo.domain.dto.RegisterDto;
 import com.example.demo.repository.UserRepository;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
+
+import static com.example.demo.domain.CustomErrorCode.CONFLICT_ID;
+import static com.example.demo.domain.CustomErrorCode.USER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -30,30 +38,35 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public boolean checkDuplicatedId(String userId) {
-        return !userRepository.existsByUserId(userId);
+
+    public void checkDuplicatedId(String userId) {
+        if (userRepository.findById(userId).isPresent()) {
+            throw new CustomException(CONFLICT_ID);
+        }
     }
 
-
     public String findUserId(FindUserIdDto findUserIdDto) {
-        String insertedName = findUserIdDto.getUserName();
-        String insertedEmail = findUserIdDto.getUserEmail();
-        return userRepository
-                .findByUserNameAndUserEmail(insertedName, insertedEmail);
+        String userName = findUserIdDto.getUserName();
+        String userEmail = findUserIdDto.getUserEmail();
+        Optional<User> user = userRepository.findByUserNameAndUserEmail(userName, userEmail);
+
+        if (user.isPresent()) {
+            return user.get().getUserId();
+        }
+        else throw new CustomException(USER_NOT_FOUND);
     }
 
 
     public String findUserPassword(FindUserPasswordDto findUserPasswordDto) {
-        String insertedId = findUserPasswordDto.getUserId();
-        String insertedName = findUserPasswordDto.getUserName();
-        String insertedEmail = findUserPasswordDto.getUserEmail();
-        return userRepository
-                .findUserPasswordByUserIdAndUserNameAndUserEmail(insertedId, insertedName,insertedEmail);
-    }
+        String userId = findUserPasswordDto.getUserId();
+        String userName = findUserPasswordDto.getUserName();
+        String userEmail = findUserPasswordDto.getUserEmail();
+        Optional<User> user = userRepository.findByUserIdAndUserNameAndUserEmail(userId, userName,userEmail);
 
-    public boolean Login (LoginDto loginDto) {
-        return userRepository
-                .existsByUserIdAndUserPassword(loginDto.getUserId(), loginDto.getUserPassword());
+        if (user.isPresent()) {
+            return user.get().getUserPassword();
+        }
+        else throw new CustomException(USER_NOT_FOUND);
     }
 
 
