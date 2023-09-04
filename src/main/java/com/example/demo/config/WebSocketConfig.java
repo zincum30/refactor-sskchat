@@ -9,5 +9,17 @@ import org.springframework.web.socket.config.annotation.EnableWebSocket;
 @EnableWebSocket
 public class WebSocketConfig {
 
+<<<<<<< Updated upstream
     
+=======
+
+    public final SocketHandler socketHandler;
+
+    @Override
+    public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
+        registry.addHandler(socketHandler, "/chat/{userId}")
+                .setAllowedOriginPatterns("*");
+    }
+
+>>>>>>> Stashed changes
 }
