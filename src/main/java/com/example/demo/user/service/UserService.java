@@ -1,24 +1,25 @@
 package com.example.demo.user.service;
 
+
 import com.example.demo.custom.dto.CustomException;
-import com.example.demo.user.entity.User;
 import com.example.demo.user.dto.ConnectedUserDto;
-import com.example.demo.user.dto.FindUserPasswordDto;
 import com.example.demo.user.dto.FindUserIdDto;
+import com.example.demo.user.dto.FindUserPasswordDto;
 import com.example.demo.user.dto.LoginDto;
 import com.example.demo.user.dto.RegisterDto;
+import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.demo.custom.CustomErrorCode.CONFLICT_ID;
-import static com.example.demo.custom.CustomErrorCode.NOT_NULL;
-import static com.example.demo.custom.CustomErrorCode.USER_NOT_FOUND;
+import static com.example.demo.custom.service.CustomErrorCode.CONFLICT_ID;
+import static com.example.demo.custom.service.CustomErrorCode.NOT_NULL;
+import static com.example.demo.custom.service.CustomErrorCode.USER_NOT_FOUND;
+
 
 @Service
 @RequiredArgsConstructor
@@ -53,8 +54,7 @@ public class UserService {
 
         if (user.isPresent()) {
             return user.get().getUserId();
-        }
-        else throw new CustomException(USER_NOT_FOUND);
+        } else throw new CustomException(USER_NOT_FOUND);
     }
 
 
@@ -62,12 +62,11 @@ public class UserService {
         String userId = findUserPasswordDto.getUserId();
         String userName = findUserPasswordDto.getUserName();
         String userEmail = findUserPasswordDto.getUserEmail();
-        Optional<User> user = userRepository.findByUserIdAndUserNameAndUserEmail(userId, userName,userEmail);
+        Optional<User> user = userRepository.findByUserIdAndUserNameAndUserEmail(userId, userName, userEmail);
 
         if (user.isPresent()) {
             return user.get().getUserPassword();
-        }
-        else throw new CustomException(USER_NOT_FOUND);
+        } else throw new CustomException(USER_NOT_FOUND);
     }
 
     public void login(LoginDto loginDto) {
@@ -89,35 +88,15 @@ public class UserService {
     }
 
 
-
     public List<User> getUserList() {
         return userRepository.findAll();
     }
 
 
-
-    public User getUserFromSession (URI userSessionUri) {
-
-        String path = userSessionUri.getPath();
-        String[] pathSegment = path.split("/");
-        String userId = "";
-        boolean isOnline = false;
-
-        for (String segment : pathSegment) {
-            if(isOnline) {
-                userId = segment;
-                break;
-            }
-            if (segment.equals("chat")) isOnline = true;
-        }
+    public User findUserById(String userId) {
         return userRepository.findByUserId(userId);
 
     }
-
-
-
-
-
 
 
 }

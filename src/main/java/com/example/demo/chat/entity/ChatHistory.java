@@ -1,6 +1,8 @@
 package com.example.demo.chat.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -8,10 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
 
-import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
@@ -22,11 +22,11 @@ import java.time.LocalDate;
 public class ChatHistory {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long chatHistoryIdx;
     String senderId;
     String senderName;
     String message;
-    @CreationTimestamp
-    LocalDate sendedDate;
+    LocalDateTime sendedDate;
 
 }

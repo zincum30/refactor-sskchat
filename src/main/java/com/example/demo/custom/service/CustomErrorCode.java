@@ -1,10 +1,9 @@
-package com.example.demo.custom;
+package com.example.demo.custom.service;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CONFLICT;
@@ -21,6 +20,7 @@ public enum CustomErrorCode {
 
     // 404 NOT_FOUND
     USER_NOT_FOUND(NOT_FOUND,"존재하지 않는 사용자입니다."),
+
     CHATTING_LOG_NOT_FOUND(NOT_FOUND, "요청하신 날짜에 채팅 내역이 없습니다."),
 
 

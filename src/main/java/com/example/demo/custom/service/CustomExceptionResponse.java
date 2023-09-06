@@ -1,10 +1,8 @@
 package com.example.demo.custom.service;
 
-import com.example.demo.custom.CustomErrorCode;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.http.ResponseEntity;
-
 
 @Getter
 @Builder
@@ -22,6 +20,6 @@ public class CustomExceptionResponse {
                         .build()
                 );
 
-    }
 
+    }
 }
