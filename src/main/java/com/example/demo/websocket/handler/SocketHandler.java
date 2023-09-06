@@ -26,7 +26,6 @@ public class SocketHandler extends TextWebSocketHandler {
 
     public static Map<WebSocketSession, User> userSessionList = new HashMap<>();
 
-
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         URI sessionUri = session.getUri();
@@ -76,7 +75,6 @@ public class SocketHandler extends TextWebSocketHandler {
             if (segment.equals("chat")) isOnline = true;
         }
         return userService.findUserById(userId);
-
     }
 
 

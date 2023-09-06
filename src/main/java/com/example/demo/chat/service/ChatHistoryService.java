@@ -1,12 +1,11 @@
 package com.example.demo.chat.service;
 
 
-import com.example.demo.chat.entity.ChatHistory;
 import com.example.demo.chat.dto.ChatHistoryDto;
+import com.example.demo.chat.entity.ChatHistory;
 import com.example.demo.chat.repository.ChatHistoryRepository;
-
-import com.example.demo.customerror.dto.CustomErrorCode;
-import com.example.demo.customerror.dto.CustomException;
+import com.example.demo.custom.CustomErrorCode;
+import com.example.demo.custom.dto.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,11 +40,4 @@ public class ChatHistoryService {
 
         return chatHistoryList;
     }
-
-
-
-
-
-
-
 }

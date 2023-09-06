@@ -3,9 +3,11 @@ package com.example.demo.user.controller;
 
 import com.example.demo.user.dto.FindUserIdDto;
 import com.example.demo.user.dto.FindUserPasswordDto;
+import com.example.demo.user.dto.LoginDto;
 import com.example.demo.user.dto.RegisterDto;
 import com.example.demo.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,9 +48,15 @@ public class UserController {
 
 
     @PostMapping("/find-password")
-    public String findUserPassword(FindUserPasswordDto findUserPasswordDto) {
+    public String findUserPassword(@RequestBody FindUserPasswordDto findUserPasswordDto) {
         return userService.findUserPassword(findUserPasswordDto);
     }
 
-    
+    @PostMapping("/login")
+    public HttpStatus login(@RequestBody LoginDto loginDto) {
+        userService.login(loginDto);
+        return HttpStatus.valueOf("Success");
+    }
+
+
 }
