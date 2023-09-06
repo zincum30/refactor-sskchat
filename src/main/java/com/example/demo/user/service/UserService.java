@@ -16,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.demo.custom.CustomErrorCode.CONFLICT_ID;
-import static com.example.demo.custom.CustomErrorCode.NOT_NULL;
-import static com.example.demo.custom.CustomErrorCode.USER_NOT_FOUND;
+import static com.example.demo.custom.service.CustomErrorCode.CONFLICT_ID;
+import static com.example.demo.custom.service.CustomErrorCode.NOT_NULL;
+import static com.example.demo.custom.service.CustomErrorCode.USER_NOT_FOUND;
 
 
 @Service
