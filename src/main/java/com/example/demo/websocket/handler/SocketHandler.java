@@ -13,6 +13,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,19 +24,13 @@ public class SocketHandler extends TextWebSocketHandler {
     private final UserService userService;
     private final ChatHistoryService chatHistoryService;
 
-
-    private final Map<WebSocketSession, User> userSessionList = new HashMap<>();
+    public static Map<WebSocketSession, User> userSessionList = new HashMap<>();
 
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         URI sessionUri = session.getUri();
         User currentUser = getUserFromSession(sessionUri);
-        ConnectedUserDto connectedUserDto = ConnectedUserDto.builder()
-                .userId(currentUser.getUserId())
-                .userName(currentUser.getUserName())
-                .build();
-
         userSessionList.put(session,currentUser);
     }
 
@@ -48,7 +43,10 @@ public class SocketHandler extends TextWebSocketHandler {
                 .userId(sender.getUserId())
                 .userName(sender.getUserName())
                 .message(msg)
+                .targetDate(LocalDateTime.now())
                 .build();
+
+        chatHistoryService.saveChatDetail(chatHistoryDto);
 
         for(WebSocketSession sess : userSessionList.keySet().stream().toList()) {
             sess.sendMessage(new TextMessage(msg));

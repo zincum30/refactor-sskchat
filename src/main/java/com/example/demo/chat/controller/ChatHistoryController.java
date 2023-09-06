@@ -21,6 +21,14 @@ public class ChatHistoryController {
 
     private final ChatHistoryService chatHistoryService;
 
+    @PostMapping("/history")
+    public ResponseEntity saveChatHistory(@RequestBody ChatHistoryDto chatHistoryDto) {
+       chatHistoryService.saveChatDetail(chatHistoryDto);
+       return ResponseEntity.ok().build();
+    }
+
+
+
     @GetMapping("/history")
     public ResponseEntity chatHistoryList(@RequestBody ChatHistoryDto chatHistoryDto) {
         List<ChatHistory> chatHistoryList = chatHistoryService.chatHistoryList(chatHistoryDto);

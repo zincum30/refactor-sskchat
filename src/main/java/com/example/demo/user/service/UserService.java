@@ -1,24 +1,25 @@
 package com.example.demo.user.service;
 
-import com.example.demo.custom.dto.CustomException;
-import com.example.demo.user.entity.User;
+
+import com.example.demo.customerror.dto.CustomException;
 import com.example.demo.user.dto.ConnectedUserDto;
-import com.example.demo.user.dto.FindUserPasswordDto;
 import com.example.demo.user.dto.FindUserIdDto;
+import com.example.demo.user.dto.FindUserPasswordDto;
 import com.example.demo.user.dto.LoginDto;
 import com.example.demo.user.dto.RegisterDto;
+import com.example.demo.user.entity.User;
 import com.example.demo.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
-import static com.example.demo.custom.CustomErrorCode.CONFLICT_ID;
-import static com.example.demo.custom.CustomErrorCode.NOT_NULL;
-import static com.example.demo.custom.CustomErrorCode.USER_NOT_FOUND;
+import static com.example.demo.customerror.dto.CustomErrorCode.CONFLICT_ID;
+import static com.example.demo.customerror.dto.CustomErrorCode.NOT_NULL;
+import static com.example.demo.customerror.dto.CustomErrorCode.USER_NOT_FOUND;
+
 
 @Service
 @RequiredArgsConstructor
