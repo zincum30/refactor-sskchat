@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface ChatHistoryRepository extends JpaRepository<ChatHistory, Long> {
 
-    List<ChatHistory> findAllBySendedDateBetween(LocalDate startDate, LocalDate endDate);
+    List<ChatHistory> findAllBySentDateBetween(LocalDate startDate, LocalDate endDate);
 }

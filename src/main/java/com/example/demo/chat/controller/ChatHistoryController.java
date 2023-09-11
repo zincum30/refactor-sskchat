@@ -16,21 +16,14 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/chat")
+@RequestMapping("/api/chat")
 public class ChatHistoryController {
 
     private final ChatHistoryService chatHistoryService;
 
-    @PostMapping("/history")
-    public ResponseEntity saveChatHistory(@RequestBody ChatHistoryDto chatHistoryDto) {
-       chatHistoryService.saveChatDetail(chatHistoryDto);
-       return ResponseEntity.ok().build();
-    }
-
-
 
     @GetMapping("/history")
-    public ResponseEntity chatHistoryList(@RequestBody ChatHistoryDto chatHistoryDto) {
+    public ResponseEntity chatHistoryList(ChatHistoryDto chatHistoryDto) {
         List<ChatHistory> chatHistoryList = chatHistoryService.chatHistoryList(chatHistoryDto);
         return ResponseEntity.ok(chatHistoryList);
     }

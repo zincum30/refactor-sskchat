@@ -2,6 +2,7 @@ package com.example.demo.user.service;
 
 
 import com.example.demo.custom.dto.CustomException;
+import com.example.demo.custom.service.CustomErrorCode;
 import com.example.demo.user.dto.ConnectedUserDto;
 import com.example.demo.user.dto.FindUserIdDto;
 import com.example.demo.user.dto.FindUserPasswordDto;
@@ -15,10 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
-import static com.example.demo.custom.service.CustomErrorCode.CONFLICT_ID;
-import static com.example.demo.custom.service.CustomErrorCode.NOT_NULL;
-import static com.example.demo.custom.service.CustomErrorCode.USER_NOT_FOUND;
 
 
 @Service
@@ -43,7 +40,7 @@ public class UserService {
 
     public void checkDuplicatedId(String userId) {
         if (userRepository.findByUserId(userId) != null) {
-            throw new CustomException(CONFLICT_ID);
+            throw new CustomException(CustomErrorCode.CONFLICT_ID);
         }
     }
 
@@ -54,7 +51,7 @@ public class UserService {
 
         if (user.isPresent()) {
             return user.get().getUserId();
-        } else throw new CustomException(USER_NOT_FOUND);
+        } else throw new CustomException(CustomErrorCode.USER_NOT_FOUND);
     }
 
 
@@ -66,7 +63,7 @@ public class UserService {
 
         if (user.isPresent()) {
             return user.get().getUserPassword();
-        } else throw new CustomException(USER_NOT_FOUND);
+        } else throw new CustomException(CustomErrorCode.USER_NOT_FOUND);
     }
 
     public void login(LoginDto loginDto) {
@@ -75,7 +72,7 @@ public class UserService {
         Optional<User> user = userRepository.findByUserIdAndUserPassword(userId, userPassword);
 
         if (user.isEmpty()) {
-            throw new CustomException(USER_NOT_FOUND);
+            throw new CustomException(CustomErrorCode.USER_NOT_FOUND);
         }
     }
 
