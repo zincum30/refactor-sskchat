@@ -27,6 +27,6 @@ public class ChatHistory {
     String senderId;
     String senderName;
     String message;
-    LocalDateTime sendedDate;
+    LocalDateTime sentDate;
 
 }

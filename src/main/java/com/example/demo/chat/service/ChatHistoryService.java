@@ -24,7 +24,7 @@ public class ChatHistoryService {
                 .senderId(chatHistoryDto.getUserId())
                 .senderName(chatHistoryDto.getUserName())
                 .message(chatHistoryDto.getMessage())
-                .sendedDate(LocalDateTime.now())
+                .sentDate(LocalDateTime.now())
                 .build();
 
         chatHistoryRepository.save(chatHistory);
@@ -33,7 +33,7 @@ public class ChatHistoryService {
 
     public List<ChatHistory> chatHistoryList(ChatHistoryDto chatHistoryDto) {
         LocalDate endRange = LocalDate.from(chatHistoryDto.getTargetDate().plusMonths(1));
-        List<ChatHistory> chatHistoryList = chatHistoryRepository.findAllBySendedDateBetween(LocalDate.now(), endRange);
+        List<ChatHistory> chatHistoryList = chatHistoryRepository.findAllBySentDateBetween(LocalDate.now(), endRange);
         if (chatHistoryList.isEmpty()) {
             throw new CustomException(CustomErrorCode.CHATTING_LOG_NOT_FOUND);
         }
