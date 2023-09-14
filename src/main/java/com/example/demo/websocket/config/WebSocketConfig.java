@@ -1,5 +1,4 @@
-package com.example.demo.config;
-
+package com.example.demo.websocket.config;
 
 import com.example.demo.websocket.handler.SocketHandler;
 import lombok.RequiredArgsConstructor;

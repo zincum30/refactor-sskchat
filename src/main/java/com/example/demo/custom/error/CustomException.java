@@ -1,6 +1,6 @@
-package com.example.demo.custom.dto;
+package com.example.demo.custom.error;
 
-import com.example.demo.custom.service.CustomErrorCode;
+import com.example.demo.custom.error.CustomErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

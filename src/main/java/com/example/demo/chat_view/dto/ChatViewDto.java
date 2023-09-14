@@ -1,4 +1,4 @@
-package com.example.demo.chat.dto;
+package com.example.demo.chat_view.dto;
 
 import jakarta.persistence.EntityListeners;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class ChatHistoryDto {
+public class ChatViewDto {
 
-    LocalDateTime targetDate;
+    String userId;
+    String userName;
+    String message;
+    LocalDateTime sentDate;
+
 }

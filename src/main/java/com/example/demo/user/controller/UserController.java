@@ -1,6 +1,8 @@
 package com.example.demo.user.controller;
 
 
+import com.example.demo.custom.response.ResponseMessage;
+import com.example.demo.custom.response.ResponseMessageCode;
 import com.example.demo.user.dto.FindUserIdDto;
 import com.example.demo.user.dto.FindUserPasswordDto;
 import com.example.demo.user.dto.LoginDto;
@@ -8,7 +10,6 @@ import com.example.demo.user.dto.RegisterDto;
 import com.example.demo.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 
 
 @RequiredArgsConstructor
-@RestControllerAdvice
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api/user")
@@ -30,15 +30,15 @@ public class UserController {
     private final UserService userService;
 
     @PutMapping("/register")
-    public Object createAccount(@RequestBody RegisterDto registerDto) {
+    public ResponseMessage createAccount(@RequestBody RegisterDto registerDto) {
         userService.createAccount(registerDto);
-        return ResponseEntity.ok().build();
+        return new ResponseMessage(ResponseMessageCode.CREATED_USER);
     }
 
     @GetMapping("/check-duplicated-id")
-    public Object checkDuplicatedId(@RequestParam(name = "userId") String userId) {
+    public ResponseMessage checkDuplicatedId(@RequestParam(name = "userId") String userId) {
         userService.checkDuplicatedId(userId);
-        return ResponseEntity.ok("available");
+        return new ResponseMessage(ResponseMessageCode.AVAILABLE_ID);
     }
 
     @PostMapping("/find-id")

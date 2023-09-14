@@ -1,8 +1,8 @@
-package com.example.demo.custom.handler;
+package com.example.demo.custom.error.handler;
 
 
-import com.example.demo.custom.dto.CustomException;
-import com.example.demo.custom.service.CustomExceptionResponse;
+import com.example.demo.custom.error.CustomException;
+import com.example.demo.custom.error.CustomExceptionResponseBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -12,8 +12,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CustomException.class)
-    public ResponseEntity<CustomExceptionResponse> handleCustomException (CustomException customException) {
-        return CustomExceptionResponse.toResponseEntity(customException.getCustomErrorCode());
+    public ResponseEntity<CustomExceptionResponseBuilder> handleCustomException (CustomException customException) {
+        return CustomExceptionResponseBuilder.toResponseEntity(customException.getCustomErrorCode());
     }
 
 }
