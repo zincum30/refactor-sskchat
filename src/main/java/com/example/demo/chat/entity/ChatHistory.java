@@ -1,9 +1,13 @@
 package com.example.demo.chat.entity;
 
+import com.example.demo.user.entity.User;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,8 +28,11 @@ public class ChatHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long chatHistoryIdx;
-    String senderId;
-    String senderName;
+
+    //@ManyToOne(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "user_idx")
+    Long senderId;
+
     String message;
     LocalDateTime sentDate;
 

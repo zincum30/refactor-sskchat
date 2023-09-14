@@ -1,4 +1,4 @@
-package com.example.demo.custom.service;
+package com.example.demo.custom.error;
 
 
 import lombok.AllArgsConstructor;

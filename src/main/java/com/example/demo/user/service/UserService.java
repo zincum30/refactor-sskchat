@@ -1,8 +1,9 @@
 package com.example.demo.user.service;
 
 
-import com.example.demo.custom.dto.CustomException;
-import com.example.demo.custom.service.CustomErrorCode;
+
+import com.example.demo.custom.error.CustomException;
+import com.example.demo.custom.error.CustomErrorCode;
 import com.example.demo.user.dto.ConnectedUserDto;
 import com.example.demo.user.dto.FindUserIdDto;
 import com.example.demo.user.dto.FindUserPasswordDto;
@@ -16,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 @RequiredArgsConstructor
@@ -81,7 +81,7 @@ public class UserService {
         if (connectedUserDto != null) {
             User userId = userRepository.findByUserId(connectedUserDto.getUserId());
             User userName = userRepository.findByUserName(connectedUserDto.getUserName());
-        } else throw new CustomException(NOT_NULL);
+        } else throw new CustomException(CustomErrorCode.NOT_NULL);
     }
 
 

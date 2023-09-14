@@ -1,9 +1,6 @@
-package com.example.demo.user.entity;
+package com.example.demo.chat_view.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
@@ -11,22 +8,25 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Immutable;
+
+import java.time.LocalDateTime;
+
 
 @Getter
-@Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "user")
-public class User {
+@Entity
+@Immutable
+@Table(name = "chat_view")
+public class ChatView {
 
     @Id
-    @Column(name = "idx")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long idx;
+    Long chatId;
     String userId;
-    String userPassword;
     String userName;
-    String userEmail;
+    String message;
+    LocalDateTime sentDate;
 
 }
