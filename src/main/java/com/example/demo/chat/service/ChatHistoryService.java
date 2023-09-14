@@ -23,7 +23,6 @@ public class ChatHistoryService {
 
     public List<ChatHistory> todayChatMessageList() {
 
-
         LocalDateTime targetDate = LocalDate.now().atStartOfDay();
         LocalDateTime endDate = targetDate.plusDays(1);
 

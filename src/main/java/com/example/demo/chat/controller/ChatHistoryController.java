@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/chat")
+@RequestMapping("/api/chat")
 public class ChatHistoryController {
 
     private final ChatHistoryService chatHistoryService;
