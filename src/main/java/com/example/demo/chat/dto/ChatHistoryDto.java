@@ -16,5 +16,9 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class ChatHistoryDto {
 
-    LocalDateTime targetDate;
+    String userId;
+    String userName;
+    String message;
+    LocalDateTime sentDate;
+
 }

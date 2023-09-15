@@ -1,5 +1,6 @@
 package com.example.demo.chat_view.controller;
 
+import com.example.demo.chat_view.dto.ChatViewDto;
 import com.example.demo.chat_view.entity.ChatView;
 import com.example.demo.chat_view.service.ChatViewService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class ChatViewController {
     private final ChatViewService chatViewService;
 
     @GetMapping
-    public List<ChatView> todayChatList() {
+    public List<ChatViewDto> todayChatList() {
         return chatViewService.todayChatList();
     }
 }
