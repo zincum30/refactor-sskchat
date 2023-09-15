@@ -6,8 +6,7 @@
 
 
 Refactoring of the Saessak Chat project above.
-Trying to separate fully independent domains while adhering to the MVC pattern. 
-But not perfect yet, so planning to keep refining the specific details.
+Trying to separate fully independent domains while adhering to the MVC pattern,but not perfect yet. So planning to keep refining the specific details.
 
 #
 
