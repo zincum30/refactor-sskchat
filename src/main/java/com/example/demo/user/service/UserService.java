@@ -1,22 +1,24 @@
 package com.example.demo.user.service;
 
 
-
-import com.example.demo.custom.error.CustomException;
 import com.example.demo.custom.error.CustomErrorCode;
-import com.example.demo.user.dto.ConnectedUserDto;
-import com.example.demo.user.dto.FindUserIdDto;
-import com.example.demo.user.dto.FindUserPasswordDto;
-import com.example.demo.user.dto.LoginDto;
-import com.example.demo.user.dto.RegisterDto;
-import com.example.demo.user.entity.User;
+import com.example.demo.custom.error.CustomException;
+import com.example.demo.user.domain.dto.ConnectedUserDto;
+import com.example.demo.user.domain.dto.FindUserIdDto;
+import com.example.demo.user.domain.dto.FindUserPasswordDto;
+import com.example.demo.user.domain.dto.LoginDto;
+import com.example.demo.user.domain.dto.RegisterDto;
 import com.example.demo.user.repository.UserRepository;
+import com.example.demo.user.domain.entity.UserEntity;
+import com.example.demo.user.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,14 +29,14 @@ public class UserService {
     @Transactional(rollbackFor = Exception.class)
     public void createAccount(RegisterDto registerDto) {
 
-        User user = User.builder()
+        UserEntity userEntity = UserEntity.builder()
                 .userId(registerDto.getUserId())
                 .userPassword(registerDto.getUserPassword())
                 .userName(registerDto.getUserName())
                 .userEmail(registerDto.getUserEmail())
                 .build();
 
-        userRepository.save(user);
+        userRepository.save(userEntity);
     }
 
 
@@ -47,7 +49,7 @@ public class UserService {
     public String findUserId(FindUserIdDto findUserIdDto) {
         String userName = findUserIdDto.getUserName();
         String userEmail = findUserIdDto.getUserEmail();
-        Optional<User> user = userRepository.findByUserNameAndUserEmail(userName, userEmail);
+        Optional<UserEntity> user = userRepository.findByUserNameAndUserEmail(userName, userEmail);
 
         if (user.isPresent()) {
             return user.get().getUserId();
@@ -59,7 +61,7 @@ public class UserService {
         String userId = findUserPasswordDto.getUserId();
         String userName = findUserPasswordDto.getUserName();
         String userEmail = findUserPasswordDto.getUserEmail();
-        Optional<User> user = userRepository.findByUserIdAndUserNameAndUserEmail(userId, userName, userEmail);
+        Optional<UserEntity> user = userRepository.findByUserIdAndUserNameAndUserEmail(userId, userName, userEmail);
 
         if (user.isPresent()) {
             return user.get().getUserPassword();
@@ -69,28 +71,51 @@ public class UserService {
     public void login(LoginDto loginDto) {
         String userId = loginDto.getUserId();
         String userPassword = loginDto.getUserPassword();
-        Optional<User> user = userRepository.findByUserIdAndUserPassword(userId, userPassword);
+        Optional<UserEntity> user = userRepository.findByUserIdAndUserPassword(userId, userPassword);
 
         if (user.isEmpty()) {
             throw new CustomException(CustomErrorCode.USER_NOT_FOUND);
         }
     }
 
-    public void logindUser(ConnectedUserDto connectedUserDto) {
+    public void loginedUser(ConnectedUserDto connectedUserDto) {
 
         if (connectedUserDto != null) {
-            User userId = userRepository.findByUserId(connectedUserDto.getUserId());
-            User userName = userRepository.findByUserName(connectedUserDto.getUserName());
+            UserEntity userEntityId = userRepository.findByUserId(connectedUserDto.getUserId());
+            UserEntity userEntityName = userRepository.findByUserName(connectedUserDto.getUserName());
         } else throw new CustomException(CustomErrorCode.NOT_NULL);
     }
 
 
-    public List<User> getUserList() {
+    public List<UserEntity> getUserList() {
         return userRepository.findAll();
     }
 
+//
+//    public Map<Long, UserEntity> getUserMap() {
+//        return userRepository.findAll().stream().collect(Collectors.toMap(
+//                userEntity -> userEntity.getIdx(),
+//                userEntity -> userEntity
+//
+//        ));
+//    }
 
-    public User findUserById(String userId) {
+    public Map<Long, User> getUser() {
+
+        Map<Long, User> userMap = userRepository.findAll().stream()
+                .collect(Collectors.toMap(
+                                getUser -> getUser.getIdx(),
+                                getUser -> User.builder()
+                                        .userId(getUser.getUserId())
+                                        .userName(getUser.getUserName())
+                                        .build()
+                        )
+                );
+
+        return userMap;
+    }
+
+    public UserEntity findUserById(String userId) {
         return userRepository.findByUserId(userId);
 
     }

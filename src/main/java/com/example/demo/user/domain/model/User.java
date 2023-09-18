@@ -1,4 +1,4 @@
-package com.example.demo.user.dto;
+package com.example.demo.user.domain.model;
 
 
 import jakarta.persistence.EntityListeners;
@@ -8,14 +8,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+
 @Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class LoginDto {
+public class User {
 
     String userId;
-    String userPassword;
+    String userName;
+
+
 
 }

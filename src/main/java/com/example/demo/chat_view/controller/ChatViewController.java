@@ -21,4 +21,9 @@ public class ChatViewController {
     public List<ChatViewDto> todayChatList() {
         return chatViewService.todayChatList();
     }
+
+    @GetMapping("/test")
+    public List<ChatViewDto> allChatList() {
+        return chatViewService.allChatList();
+    }
 }

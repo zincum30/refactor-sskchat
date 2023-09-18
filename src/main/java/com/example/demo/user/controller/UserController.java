@@ -3,13 +3,14 @@ package com.example.demo.user.controller;
 
 import com.example.demo.custom.response.ResponseMessage;
 import com.example.demo.custom.response.ResponseMessageCode;
-import com.example.demo.user.dto.FindUserIdDto;
-import com.example.demo.user.dto.FindUserPasswordDto;
-import com.example.demo.user.dto.LoginDto;
-import com.example.demo.user.dto.RegisterDto;
+import com.example.demo.user.domain.dto.FindUserIdDto;
+import com.example.demo.user.domain.dto.FindUserPasswordDto;
+import com.example.demo.user.domain.dto.LoginDto;
+import com.example.demo.user.domain.dto.RegisterDto;
 import com.example.demo.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,9 +37,9 @@ public class UserController {
     }
 
     @GetMapping("/check-duplicated-id")
-    public ResponseMessage checkDuplicatedId(@RequestParam(name = "userId") String userId) {
+    public ResponseEntity checkDuplicatedId(@RequestParam(name = "userId") String userId) {
         userService.checkDuplicatedId(userId);
-        return new ResponseMessage(ResponseMessageCode.AVAILABLE_ID);
+        return ResponseEntity.ok().body(ResponseMessageCode.AVAILABLE_ID.getMessage());
     }
 
     @PostMapping("/find-id")

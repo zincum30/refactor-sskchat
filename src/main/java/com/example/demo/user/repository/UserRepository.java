@@ -1,6 +1,6 @@
 package com.example.demo.user.repository;
 
-import com.example.demo.user.entity.User;
+import com.example.demo.user.domain.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,16 +8,20 @@ import java.util.Optional;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    User findByUserId(String userId);
 
-    User findByUserName(String userName);
+    UserEntity findByUserId(String userId);
 
-    Optional<User> findByUserIdAndUserPassword(String userId, String userPassword);
+    UserEntity findByUserName(String userName);
 
-    Optional<User> findByUserNameAndUserEmail(String userName, String userEmail);
+    UserEntity findByIdx(Long idx);
 
-    Optional<User> findByUserIdAndUserNameAndUserEmail(String userId, String userName, String userEmail);
+    Optional<UserEntity> findByUserIdAndUserPassword(String userId, String userPassword);
+
+    Optional<UserEntity> findByUserNameAndUserEmail(String userName, String userEmail);
+
+    Optional<UserEntity> findByUserIdAndUserNameAndUserEmail(String userId, String userName, String userEmail);
+
 
 }
