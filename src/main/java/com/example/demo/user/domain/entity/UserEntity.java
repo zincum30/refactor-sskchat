@@ -1,4 +1,4 @@
-package com.example.demo.user.entity;
+package com.example.demo.user.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "user")
-public class User {
+public class UserEntity {
 
     @Id
     @Column(name = "idx")

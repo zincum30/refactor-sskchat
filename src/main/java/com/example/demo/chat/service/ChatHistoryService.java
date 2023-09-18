@@ -22,23 +22,20 @@ public class ChatHistoryService {
 
     private final ChatHistoryRepository chatHistoryRepository;
 
-
-    public List<ChatHistory> todayChatMessageList() {
+    public List<ChatHistory> todayChatMessageList() throws CustomException {
 
         LocalDateTime targetDate = LocalDate.now().atStartOfDay();
         LocalDateTime endDate = targetDate.plusDays(1);
 
-
         List<ChatHistory> repochatMessageList = chatHistoryRepository.findAllBySentDateBetween(targetDate, endDate);
 
-        if (repochatMessageList.isEmpty()) {
-            throw new CustomException(CustomErrorCode.CHATTING_LOG_NOT_FOUND);
-        }
-
-//        List<ChatHistoryDto> todayChatMessageList = repochatMessageList.stream()
-//                .map(ChatHistory ->  new ChatHistoryDto(ChatHistory.getSenderId()))
-
-
         return repochatMessageList;
+    }
+
+
+    public List<ChatHistory> allChatList() throws CustomException {
+
+        return chatHistoryRepository.findAll();
+
     }
 }

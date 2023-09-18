@@ -1,4 +1,4 @@
-package com.example.demo.user.dto;
+package com.example.demo.user.domain.dto;
 
 import jakarta.persistence.EntityListeners;
 import lombok.AllArgsConstructor;
@@ -12,9 +12,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class FindUserIdDto {
+public class ConnectedUserDto {
 
+    String userId;
     String userName;
-    String userEmail;
-
 }

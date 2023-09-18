@@ -32,3 +32,4 @@ public enum CustomErrorCode {
     private final String detail;
 
 }
+

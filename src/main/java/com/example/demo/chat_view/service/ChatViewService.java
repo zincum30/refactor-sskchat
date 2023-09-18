@@ -37,6 +37,21 @@ public class ChatViewService {
         return todayChatViewList;
     }
 
+
+    public List<ChatViewDto> allChatList() {
+
+        List<ChatView> repoChatViewList = chatViewRepository.findAll();
+
+        if (repoChatViewList.isEmpty()) {
+            throw new CustomException(CustomErrorCode.CHATTING_LOG_NOT_FOUND);
+        }
+
+        return repoChatViewList.stream()
+                .map(ChatView -> new ChatViewDto(ChatView.getUserId(), ChatView.getUserName(),ChatView.getMessage(), ChatView.getSentDate()))
+                .collect(Collectors.toList());
+
+    }
+
 }
 
 

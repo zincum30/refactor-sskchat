@@ -1,6 +1,6 @@
 package com.example.demo.websocket.handler;
 
-import com.example.demo.user.entity.User;
+import com.example.demo.user.domain.entity.UserEntity;
 //import com.example.demo.chat.dto.ChatHistoryDto;
 //import com.example.demo.chat.service.ChatHistoryService;
 import com.example.demo.user.service.UserService;
@@ -21,13 +21,13 @@ public class SocketHandler extends TextWebSocketHandler {
     private final UserService userService;
 //    private final ChatHistoryService chatHistoryService;
 
-    public static Map<WebSocketSession, User> userSessionList = new HashMap<>();
+    public static Map<WebSocketSession, UserEntity> userSessionList = new HashMap<>();
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         URI sessionUri = session.getUri();
-        User currentUser = getUserFromSession(sessionUri);
-        userSessionList.put(session,currentUser);
+        UserEntity currentUserEntity = getUserFromSession(sessionUri);
+        userSessionList.put(session, currentUserEntity);
     }
 
 
@@ -57,7 +57,7 @@ public class SocketHandler extends TextWebSocketHandler {
     }
 
 
-    public User getUserFromSession (URI userSessionUri) {
+    public UserEntity getUserFromSession (URI userSessionUri) {
 
         String path = userSessionUri.getPath();
         String[] pathSegment = path.split("/");
