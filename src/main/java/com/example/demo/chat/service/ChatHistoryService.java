@@ -2,11 +2,8 @@ package com.example.demo.chat.service;
 
 
 
-import com.example.demo.chat.dto.ChatHistoryDto;
 import com.example.demo.chat.entity.ChatHistory;
 import com.example.demo.chat.repository.ChatHistoryRepository;
-import com.example.demo.chat_view.dto.ChatViewDto;
-import com.example.demo.custom.error.CustomErrorCode;
 import com.example.demo.custom.error.CustomException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

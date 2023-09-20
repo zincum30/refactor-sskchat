@@ -1,7 +1,6 @@
 package com.example.demo.chat_view.controller;
 
-import com.example.demo.chat_view.dto.ChatViewDto;
-import com.example.demo.chat_view.entity.ChatView;
+import com.example.demo.chat_view.service.dto.ChatViewDto;
 import com.example.demo.chat_view.service.ChatViewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
