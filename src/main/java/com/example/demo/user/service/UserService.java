@@ -3,7 +3,6 @@ package com.example.demo.user.service;
 
 import com.example.demo.custom.error.CustomErrorCode;
 import com.example.demo.custom.error.CustomException;
-import com.example.demo.user.domain.dto.ConnectedUserDto;
 import com.example.demo.user.domain.dto.FindUserIdDto;
 import com.example.demo.user.domain.dto.FindUserPasswordDto;
 import com.example.demo.user.domain.dto.LoginDto;

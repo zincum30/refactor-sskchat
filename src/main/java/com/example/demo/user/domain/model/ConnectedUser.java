@@ -1,4 +1,4 @@
-package com.example.demo.user.domain.dto;
+package com.example.demo.user.domain.model;
 
 import jakarta.persistence.EntityListeners;
 import lombok.AllArgsConstructor;
@@ -12,9 +12,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class UserListDto {
+public class ConnectedUser {
 
     String userId;
     String userName;
     boolean isOnline;
+
 }

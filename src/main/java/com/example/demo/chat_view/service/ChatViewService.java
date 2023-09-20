@@ -1,6 +1,6 @@
 package com.example.demo.chat_view.service;
 
-import com.example.demo.chat_view.dto.ChatViewDto;
+import com.example.demo.chat_view.service.dto.ChatViewDto;
 import com.example.demo.chat_view.entity.ChatView;
 import com.example.demo.chat_view.repository.ChatViewRepository;
 import com.example.demo.custom.error.CustomErrorCode;

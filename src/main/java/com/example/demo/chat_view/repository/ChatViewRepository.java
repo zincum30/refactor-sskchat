@@ -1,12 +1,9 @@
 package com.example.demo.chat_view.repository;
 
-import com.example.demo.chat.entity.ChatHistory;
-import com.example.demo.chat_view.dto.ChatViewDto;
 import com.example.demo.chat_view.entity.ChatView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 

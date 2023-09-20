@@ -1,4 +1,4 @@
-package com.example.demo.chat_view.dto;
+package com.example.demo.chat_view.service.dto;
 
 import jakarta.persistence.EntityListeners;
 import lombok.AllArgsConstructor;

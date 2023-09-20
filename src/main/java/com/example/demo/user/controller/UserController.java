@@ -31,32 +31,36 @@ public class UserController {
     private final UserService userService;
 
     @PutMapping("/register")
-    public ResponseMessage createAccount(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<String> createAccount(@RequestBody RegisterDto registerDto) {
         userService.createAccount(registerDto);
-        return new ResponseMessage(ResponseMessageCode.CREATED_USER);
+        return ResponseEntity.ok().body(ResponseMessageCode.CREATED_USER.getMessage());
     }
 
     @GetMapping("/check-duplicated-id")
-    public ResponseEntity checkDuplicatedId(@RequestParam(name = "userId") String userId) {
+    public ResponseEntity<String> checkDuplicatedId(@RequestParam(name = "userId") String userId) {
         userService.checkDuplicatedId(userId);
         return ResponseEntity.ok().body(ResponseMessageCode.AVAILABLE_ID.getMessage());
     }
 
-    @PostMapping("/find-id")
+    @GetMapping("/find-id")
     public String findUserId(@RequestBody FindUserIdDto findUserIdDto){
         return userService.findUserId(findUserIdDto);
     }
 
 
-    @PostMapping("/find-password")
+    @GetMapping("/find-password")
     public String findUserPassword(@RequestBody FindUserPasswordDto findUserPasswordDto) {
         return userService.findUserPassword(findUserPasswordDto);
     }
 
-    @PostMapping("/login")
-    public HttpStatus login(@RequestBody LoginDto loginDto) {
+    @GetMapping("/login")
+    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
         userService.login(loginDto);
-        return HttpStatus.valueOf("Success");
+        return ResponseEntity.ok().body(ResponseMessageCode.LOGIN_SUCCESS.getMessage());
+
+
+
+
     }
 
 
