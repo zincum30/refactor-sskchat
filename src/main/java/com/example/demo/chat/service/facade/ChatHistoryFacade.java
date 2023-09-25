@@ -1,7 +1,7 @@
 package com.example.demo.chat.service.facade;
 
 import com.example.demo.chat.dto.ChatHistoryDto;
-import com.example.demo.chat.entity.ChatHistory;
+import com.example.demo.chat.entity.ChatHistoryEntity;
 import com.example.demo.chat.service.ChatHistoryService;
 
 import com.example.demo.custom.error.CustomErrorCode;
@@ -23,16 +23,19 @@ public class ChatHistoryFacade {
     private final ChatHistoryService chatHistoryService;
 
 
+
+
+
     public List<ChatHistoryDto> fetchChatHistory() {
-        List<ChatHistory> chatHistoryList = chatHistoryService.todayChatMessageList();
+        List<ChatHistoryEntity> chatHistoryEntityList = chatHistoryService.todayChatMessageList();
         Map<Long, User> userMap = userService.getUser();
 
-        List<ChatHistoryDto> todayChatList = chatHistoryList.stream().map(
-                chatHistory -> new ChatHistoryDto(
-                        userMap.get(chatHistory.getUserIdx()).getUserId(),
-                        userMap.get(chatHistory.getUserIdx()).getUserName(),
-                        chatHistory.getMessage(),
-                        chatHistory.getSentDate()
+        List<ChatHistoryDto> todayChatList = chatHistoryEntityList.stream().map(
+                chatHistoryEntity -> new ChatHistoryDto(
+                        userMap.get(chatHistoryEntity.getUserIdx()).getUserId(),
+                        userMap.get(chatHistoryEntity.getUserIdx()).getUserName(),
+                        chatHistoryEntity.getMessage(),
+                        chatHistoryEntity.getSentDate()
                 )
         ).collect(Collectors.toList());
 
@@ -43,6 +46,16 @@ public class ChatHistoryFacade {
         return todayChatList;
     }
 
+
+    public void sendChatMessage (ChatHistoryDto chatHistoryDto) {
+
+    }
+
+
+
+
+/*
+ ---채팅 목록 전체 호출 속도 테스트 시
 
     public List<ChatHistoryDto> fetchAllChatHistory() {
         List<ChatHistory> allChatHistoryList = chatHistoryService.allChatList();
@@ -64,6 +77,11 @@ public class ChatHistoryFacade {
         return todayChatList;
 
     }
+
+ */
+
+
+
 
 }
 
