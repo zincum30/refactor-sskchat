@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "chat_history")
-public class ChatHistory {
+public class ChatHistoryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

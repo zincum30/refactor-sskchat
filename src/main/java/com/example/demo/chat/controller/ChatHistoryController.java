@@ -26,8 +26,13 @@ public class ChatHistoryController {
     }
 
 
+    /*
+    --- 채팅 목록 호출 속도 테스트 시
+
     @GetMapping("/test")
     public List<ChatHistoryDto> allChatMessages() {
         return chatHistoryFacade.fetchAllChatHistory();
     }
+    */
+
 }

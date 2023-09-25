@@ -7,6 +7,7 @@ import com.example.demo.user.domain.dto.FindUserIdDto;
 import com.example.demo.user.domain.dto.FindUserPasswordDto;
 import com.example.demo.user.domain.dto.LoginDto;
 import com.example.demo.user.domain.dto.RegisterDto;
+import com.example.demo.user.domain.model.ConnectedUser;
 import com.example.demo.user.repository.UserRepository;
 import com.example.demo.user.domain.entity.UserEntity;
 import com.example.demo.user.domain.model.User;
@@ -77,11 +78,11 @@ public class UserService {
         }
     }
 
-    public void loginedUser(ConnectedUserDto connectedUserDto) {
+    public void loginedUser(ConnectedUser connectedUser) {
 
-        if (connectedUserDto != null) {
-            UserEntity userEntityId = userRepository.findByUserId(connectedUserDto.getUserId());
-            UserEntity userEntityName = userRepository.findByUserName(connectedUserDto.getUserName());
+        if (connectedUser != null) {
+            UserEntity userEntityId = userRepository.findByUserId(connectedUser.getUserId());
+            UserEntity userEntityName = userRepository.findByUserName(connectedUser.getUserName());
         } else throw new CustomException(CustomErrorCode.NOT_NULL);
     }
 
@@ -89,15 +90,6 @@ public class UserService {
     public List<UserEntity> getUserList() {
         return userRepository.findAll();
     }
-
-//
-//    public Map<Long, UserEntity> getUserMap() {
-//        return userRepository.findAll().stream().collect(Collectors.toMap(
-//                userEntity -> userEntity.getIdx(),
-//                userEntity -> userEntity
-//
-//        ));
-//    }
 
     public Map<Long, User> getUser() {
 
@@ -117,6 +109,11 @@ public class UserService {
     public UserEntity findUserById(String userId) {
         return userRepository.findByUserId(userId);
 
+    }
+
+
+    public Long findIdxByUserId(String userId) {
+        return userRepository.findByUserId(userId).getIdx();
     }
 
 
