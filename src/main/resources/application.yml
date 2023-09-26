@@ -20,3 +20,21 @@ spring:
 
 logging.level:
   org.hibernate.SQL: debug
+
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    groups-order: ASC
+    tags-sorter: alpha
+    operationsSorter: alpha
+    disable-swagger-default-url: true
+    display-request-duration: true
+  api-docs:
+    path: /api-docs
+    groups:
+      enabled: true
+  show-actuator: true
+  override-with-generic-response: false
+  default-consumes-media-type: application/json
+  default-produces-media-type: application/json
