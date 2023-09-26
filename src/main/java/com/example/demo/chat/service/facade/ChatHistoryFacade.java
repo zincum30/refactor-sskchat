@@ -47,9 +47,9 @@ public class ChatHistoryFacade {
     }
 
 
-    public void sendChatMessage (ChatHistoryDto chatHistoryDto) {
-
-    }
+//    public void sendChatMessage (ChatHistoryDto chatHistoryDto) {
+//
+//    }
 
 
 
