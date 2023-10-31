@@ -8,10 +8,3 @@
 Refactoring of the Saessak Chat project above.
 Trying to separate fully independent domains while adhering to the MVC pattern,but not perfect yet. So planning to keep refining the specific details.
 
-#
-
-
-> <a href="https://develdog.tistory.com/28" target="_blank"> https://develdog.tistory.com/28</a>
-
-
-You can check out the project's progress & issues
